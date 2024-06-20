@@ -1,0 +1,14 @@
+.footer_Container {
+    background-color: #000;
+    width:100%;
+    bottom:0;
+    position:absolute;
+}
+
+.footer_text {
+    color:#fff;
+    font-family: "Montserrat", sans-serif;
+    font-size:12px;
+    font-weight: 200 !important;
+    font-style: normal;
+}

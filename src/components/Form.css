@@ -1,0 +1,100 @@
+
+.AddImages {
+    border: 2px dashed #cccccc;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    margin-top:10px;
+}
+
+.AddImagesText {
+    color:#000;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.ImagesPreviewContainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.ImagesPreview {
+    width: 100px;
+    margin: 10px;
+}
+
+.formContainer {
+    display: flex;
+    justify-content:center;
+}
+
+/* Form Fields */
+input[type="text"],
+input[type="number"],
+textarea {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* Submit Button */
+.SubmitButton {
+  width: 80%;
+  padding: 10px;
+  background-color: #000;
+  color: #ffffff;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top:10px;
+}
+
+
+
+/* Placeholder Text */
+input::placeholder,
+textarea::placeholder {
+  color: #888;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.RemoveImage {
+    position: absolute;
+    text-align:center;
+    background-color:transparent;
+    color: #000;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index:2;
+}
+
+.OneImagePreview{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; 
+    margin: 10px;
+}
+
+.NameProductInput {
+    margin-bottom:20px;
+}

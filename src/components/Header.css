@@ -1,0 +1,49 @@
+.globalNav{
+    display:flex;
+    background:transparent;
+    justify-content: space-between;
+    align-items: center;
+    ul{
+        margin:0;
+        padding:0;
+        list-style:none;
+        color:#fff;
+        display:flex;
+        li {
+            padding:10px;
+            color:#000000;
+            font-family: "Montserrat", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 300;
+            font-style: normal;
+        }
+    }
+}
+
+a{
+    text-decoration: none;
+    color:#fff;
+}
+
+.Logo {
+    color:#000;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    padding: 0 0 0 10px;
+}
+
+.AddCreation {
+    border:1px solid #000;
+    color:#000 !important;
+    margin-right:20px;
+    margin-left:10px;
+    border-radius:13px;
+    width:25px;
+    font-family: "Montserrat", sans-serif;
+    font-size:20px;
+    font-weight: 800 !important;
+    font-style: normal;
+
+}
