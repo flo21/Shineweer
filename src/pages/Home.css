@@ -1,0 +1,33 @@
+.Titre_h1 {
+    color:#000;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    text-align: center;
+    font-style: normal;
+}
+.Slogan {
+    color:#000;
+    font-family: "Montserrat", sans-serif;
+    font-size:16px;
+    font-weight: 300;
+    font-style: normal;
+    text-align:center;
+    padding:0 0 0 30px;
+}
+
+@media only screen and (max-width: 395px) {
+    .Titre_h1 {
+        color:#000;
+        font-family: "Montserrat", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 800;
+        font-style: normal;
+        text-align:left;
+        padding:0 0 0 30px;
+        width:200px;
+    }
+    .Slogan {
+        display: none;
+    }
+}
