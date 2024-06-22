@@ -3,6 +3,8 @@
     background:transparent;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    z-index: 2;
     ul{
         margin:0;
         padding:0;
@@ -28,7 +30,7 @@ a{
 .Logo {
     color:#000;
     font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
+    font-size:30px;
     font-weight: 200;
     font-style: normal;
     padding: 0 0 0 10px;
