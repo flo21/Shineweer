@@ -1,12 +1,18 @@
 
 .Product_Container {
     width:100%;
-    position: absolute;
-    top: 0;
+    
+
+
+    .Product_Content {
+        top:0;
+        position: absolute;
+    }
 
     .image_product{
         width:100%;
         top:0;
+
     }
     .information_product {
         display: flex;
@@ -68,6 +74,7 @@
             font-weight: 300;
             text-align: left;
             font-style: normal;
+            margin-bottom:75px;
         }
     }
 }

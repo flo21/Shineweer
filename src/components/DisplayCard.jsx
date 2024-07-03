@@ -1,101 +1,66 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
-import "./DisplayCard.css"
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import './DisplayCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-function DisplayCard({name}) {
 
-  const [likeCounts, setLikeCounts] = useState({}); 
+function DisplayCard() {
+  const [products, setProducts] = useState([]);
+  const [likeCounts, setLikeCounts] = useState({});
 
   useEffect(() => {
-        // Initialize likeCounts from localStorage
-        const likeCounts = JSON.parse(localStorage.getItem('likeCounts')) || {};
-        setLikeCounts(likeCounts);
-        console.log("nb clic :",likeCounts);
+    // Fetch products from the backend
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('http://localhost:3200/products');
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching products', error);
+      }
+    };
+
+    // Initialize likeCounts from localStorage
+    const storedLikeCounts = JSON.parse(localStorage.getItem('likeCounts')) || {};
+    setLikeCounts(storedLikeCounts);
+
+    fetchProducts();
   }, []);
 
   const handleLikeClick = (name) => {
-    const likeCounts = JSON.parse(localStorage.getItem('likeCounts')) || {};
-    likeCounts[name] = (likeCounts[name] || 0) + 1;
-    localStorage.setItem('likeCounts', JSON.stringify(likeCounts));
-    setLikeCounts(likeCounts);
+    const updatedLikeCounts = { ...likeCounts, [name]: (likeCounts[name] || 0) + 1 };
+    localStorage.setItem('likeCounts', JSON.stringify(updatedLikeCounts));
+    setLikeCounts(updatedLikeCounts);
   };
 
   return (
     <div className="card_Container">
-        
-            <div className="global_Card">
-                <Link to="/Product">
-                    <img className="card_image" src="../../public/1.png" alt="1" />
-                </Link>
-                    <button onClick={(e) => { e.stopPropagation(name); handleLikeClick(name);}} className="like-button">
-                        <FontAwesomeIcon icon={faHeart} /> 
-                    </button>
-                
-            </div>
-        
-        <div className="global_Card">
-            <img className="card_image" src="../../public/2.png" alt="1" />
-            <button onClick={(e) => { e.stopPropagation(name); handleLikeClick(name);}} className="like-button">
-                <FontAwesomeIcon icon={faHeart} /> 
-            </button>
+      {products.map((product) => (
+        <div key={product._id} className="global_Card">
+          <Link to={`/product/${product._id}`}>
+            <img
+              className="card_image"
+              src={`data:${product.images[0].contentType};base64,${btoa(
+                new Uint8Array(product.images[0].data.data).reduce(
+                  (data, byte) => data + String.fromCharCode(byte),
+                  ''
+                )
+              )}`}
+              alt={product.name}
+            />
+          </Link>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleLikeClick(product.name);
+            }}
+            className="like-button"
+          >
+            <FontAwesomeIcon icon={faHeart} />
+          </button>
         </div>
-        <div className="global_Card">
-            <img className="card_image" src="../../public/3.png" alt="1" />
-            <button onClick={(e) => { e.stopPropagation(name); handleLikeClick(name);}} className="like-button">
-                <FontAwesomeIcon icon={faHeart} /> 
-            </button>
-        </div>
-        <div className="global_Card">
-            <img className="card_image" src="../../public/4.png" alt="1" />
-            <button onClick={(e) => { e.stopPropagation(name); handleLikeClick(name);}} className="like-button">
-                <FontAwesomeIcon icon={faHeart} /> 
-            </button>
-        </div>
-        <div className="global_Card">
-            <img className="card_image" src="../../public/5.png" alt="1" />
-            <button onClick={(e) => { e.stopPropagation(name); handleLikeClick(name);}} className="like-button">
-                <FontAwesomeIcon icon={faHeart} /> 
-            </button>
-        </div>
-        <div className="global_Card">
-            <img className="card_image" src="../../public/6.png" alt="1" />
-            <button onClick={(e) => { e.stopPropagation(name); handleLikeClick(name);}} className="like-button">
-                <FontAwesomeIcon icon={faHeart} /> 
-            </button>
-        </div>
-        <div className="global_Card">
-            <img className="card_image" src="../../public/12.png" alt="1" />
-            <button onClick={(e) => { e.stopPropagation(name); handleLikeClick(name);}} className="like-button">
-                <FontAwesomeIcon icon={faHeart} /> 
-            </button>
-        </div>
-        <div className="global_Card">
-            <img className="card_image" src="../../public/13.png" alt="1" />
-            <button onClick={(e) => { e.stopPropagation(name); handleLikeClick(name);}} className="like-button">
-                <FontAwesomeIcon icon={faHeart} /> 
-            </button>
-        </div>
-        <div className="global_Card">
-            <img className="card_image" src="../../public/14.png" alt="1" />
-            <button onClick={(e) => { e.stopPropagation(name); handleLikeClick(name);}} className="like-button">
-                <FontAwesomeIcon icon={faHeart} /> 
-            </button>
-        </div>
-        <div className="global_Card">
-            <img className="card_image" src="../../public/15.png" alt="1" />
-            <button onClick={(e) => { e.stopPropagation(name); handleLikeClick(name);}} className="like-button">
-                <FontAwesomeIcon icon={faHeart} /> 
-            </button>
-        </div>
-        <div className="global_Card">
-            <img className="card_image" src="../../public/16.png" alt="1" />
-            <button onClick={(e) => { e.stopPropagation(name); handleLikeClick(name);}} className="like-button">
-                <FontAwesomeIcon icon={faHeart} /> 
-            </button>
-        </div>
+      ))}
     </div>
-      
   );
 }
 

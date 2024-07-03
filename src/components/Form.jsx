@@ -6,11 +6,20 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 function ProductForm() {
   const [images, setImages] = useState([]);
-  const [name, setName] = useState([]);
+  const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
 
-  const onDrop = useCallback((acceptedFiles) => {
+  const onDrop = useCallback((acceptedFiles, fileRejections) => {
+    console.log('Accepted files:', acceptedFiles);
+    console.log('File rejections:', fileRejections);
+
+    fileRejections.forEach(({ file, errors }) => {
+      errors.forEach(e => {
+        console.error(`Error with file ${file.name}: ${e.message}`);
+      });
+    });
+
     const newImages = acceptedFiles.map((file) => {
       return Object.assign(file, {
         preview: URL.createObjectURL(file),
@@ -33,7 +42,10 @@ function ProductForm() {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: 'image/*',
+    accept: {
+      'image/jpeg': ['.jpeg', '.jpg'],
+      'image/png': ['.png']
+    },
     multiple: true,
   });
 
@@ -47,13 +59,24 @@ function ProductForm() {
     formData.append('description', description);
     formData.append('price', price);
 
+    // Log formData values
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
+
     try {
-      await axios.post('http://localhost:3000/products', formData, {
+      const response = await axios.post('http://localhost:3200/products', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
+      console.log('Server response:', response.data);
       alert('Produit ajouté avec succès');
+      // Clear the form
+      setImages([]);
+      setName('');
+      setDescription('');
+      setPrice('');
     } catch (error) {
       console.error('Erreur lors de l\'ajout du produit', error);
     }
@@ -113,7 +136,6 @@ function ProductForm() {
                 required
             />
             <button className="SubmitButton" type="submit">Ajouter une création</button>
-
         </form>
     </div>
   );

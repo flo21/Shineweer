@@ -1,6 +1,6 @@
 .globalNav{
     display:flex;
-    background:transparent;
+    background-color:transparent;
     justify-content: space-between;
     align-items: center;
     position: relative;
@@ -38,6 +38,7 @@ a{
 
 .AddCreation {
     border:1px solid #000;
+    text-align: center;
     color:#000 !important;
     margin-right:20px;
     margin-left:10px;
